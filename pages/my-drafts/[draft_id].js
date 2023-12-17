@@ -1,0 +1,93 @@
+import { supabase } from '../api/supabase'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+
+export default function Draft(){
+
+    const router = useRouter()
+    const { draft_id } = router.query
+
+    const [ subjectLine, setSubjectLine ] = useState('')
+    const [ emailText, setEmailText ] = useState('')
+    const [ writerName, setWriterName ] = useState('')
+    const [ openDeleteConfirmation, setOpenDeleteConfirmation ] = useState(false)
+
+    async function getDraftData(){
+        let { data: drafts, error } = await supabase
+        .from('drafts')
+        .select(`
+          subject_line, 
+          text,
+          writer_id(
+            name
+          )
+        `)
+        .eq('id', draft_id)
+        setSubjectLine(drafts[0].subject_line)
+        let formatted_text = drafts[0].text.replace(/\n/g, '<br />')
+        setEmailText(formatted_text)
+        console.log(drafts)
+        setWriterName(drafts[0].writer_id.name)
+
+    }
+
+    useEffect(() => {
+        getDraftData()
+    }, [])
+
+    const handleCopyClick = (text) => {
+        // Create a temporary textarea element to execute the copy command
+        const tempTextArea = document.createElement('textarea');
+        const formattedText = text.replace(/<br \/>/g, '\n')
+        tempTextArea.value = formattedText;
+      
+        // Set the position to be off-screen
+        tempTextArea.style.position = 'absolute';
+        tempTextArea.style.left = '-9999px';
+      
+        // Append the textarea to the DOM
+        document.body.appendChild(tempTextArea);
+      
+        // Select the text inside the textarea
+        tempTextArea.select();
+      
+        // Execute the copy command
+        document.execCommand('copy');
+      
+        // Remove the temporary textarea from the DOM
+        document.body.removeChild(tempTextArea);
+      
+        // You can also provide feedback to the user, e.g., using a tooltip or alert
+        alert('Text copied to clipboard!');
+    }
+
+    async function deleteDraft() {
+      const { error } = await supabase
+      .from('drafts')
+      .delete()
+      .eq('id', draft_id)
+      router.push('/my-drafts')
+    }
+
+    return (
+        <div className="flex flex-col justify-center items-center relative w-full h-full px-2 py-8">
+            <h2 className="text-6xl font-bold text-blue-600">
+              <Link href="/new-draft">
+              Draftmails 📝
+              </Link>
+            </h2>
+            <div className="2xl:w-1/2 rounded-md border-2 border-blue-600 px-6 py-3 mt-8">
+              <h1 className="text-4xl text-gray-50 bg-blue-600 px-3 py-2 font-bold text-center">{subjectLine}</h1>
+              <div className="flex flex-row items-center justify-between mt-8">
+                <p className="rounded-2xl py-2 text-blue-500 text-xl font-bold mr-8">{writerName}</p>
+                <div>
+                <button type="button" onClick={() => handleCopyClick(emailText)} className="rounded-2xl bg-gray-100 text-gray-900 font-bold text-xl px-5 py-2 mr-2">Copy</button>
+                <button type="button" onClick={deleteDraft} className="rounded-2xl bg-red-50 text-red-600 font-bold text-xl px-5 py-2">Delete</button>
+                </div>
+              </div>
+              <p className="text-xl mt-4" dangerouslySetInnerHTML={{ __html: emailText }}></p>
+            </div>
+        </div>
+    )
+}
