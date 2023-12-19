@@ -35,7 +35,7 @@ export default function EditDraft() {
         if (drafts.length == 0) {
           subject_line = "Email #1"
         } else {
-          subject_line = drafts[0].writer_id.newsletter + " email #" + drafts.length+1
+          subject_line = drafts[0].writer_id.newsletter + " email #" + drafts.length+1 
         }
         setSubjectLine(subject_line)
         const { data, error } = await supabase
@@ -115,15 +115,15 @@ export default function EditDraft() {
               { readingTime >= 1 && <p className="bg-blue-50 font-semibold rounded-md px-5 py-3 text-blue-500 my-2">Reading time: About {readingTime} minutes</p> }
               </div>
               <div className="rounded-md py-2">
-                <label htmlFor="status" className="font-semibold text-xl text-blue-400 mr-2">Status</label> 
+                <label htmlFor="status" className="font-semibold text-xl text-blue-600 mr-2">Status</label> 
                 <select 
                   id="status" 
                   value={status} 
                   onChange={e => setStatus(e.target.value)} 
-                  className="outline-none font-semibold bg-blue-500 text-lg px-2 py-1 rounded-md">
-                  <option value="planning">Idea/Planning</option>
-                  <option value="drafting">Drafting</option>
-                  <option value="finished">Finished</option>
+                  className="outline-none bg-blue-500 text-gray-50 font-semibold text-lg px-2 py-1 rounded-md">
+                  <option value="planning" className="font-semibold">Idea/Planning</option>
+                  <option value="drafting" className="font-semibold">Drafting</option>
+                  <option value="finished" className="font-semibold">Finished</option>
                 </select>
               </div>
               </div>
