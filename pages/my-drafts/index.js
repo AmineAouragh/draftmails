@@ -42,24 +42,28 @@ export default function Drafts() {
                         drafts.map(
                             draft =>
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id}>
-                            <div id={draft.id} className="relative rounded-md h-full flex flex-col justify-center items-center bg-blue-700 px-5 py-4">
-                                <h3 className="text-2xl text-gray-50 font-bold">{draft.subject_line}</h3>
-                                <div className="mt-4 rounded-md bg-gray-50 px-3 py-4">
-                                    <p className="text-xl">{draft.text.slice(0, 200)}</p>
+                                <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-700 rounded-md px-5 py-4">
+                                  <div className="flex flex-col justify-center items-center">
+                                    <h3 className="text-2xl text-gray-50 font-bold">{draft.subject_line}</h3>
+                                    <div className="mt-4 rounded-md bg-gray-50 px-3 py-4">
+                                      <p className="text-xl">{draft.text.slice(0, 200)}</p>
+                                    </div>
+                                  </div>
+                                  <div className="flex flex-row items-center justify-between">
+                                    {
+                                      (draft.status == "planning") &&
+                                      <div className="mt-4 rounded-xl text-xl bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                    }
+                                    {
+                                      (draft.status == "drafting") &&
+                                      <div className="mt-4 rounded-xl text-xl bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                    }
+                                    {
+                                      (draft.status == "finished") &&
+                                      <div className="mt-4 rounded-xl text-xl bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                    }
+                                  </div>
                                 </div>
-                                {
-                                    (draft.status == "planning") &&
-                                    <div className="mt-4 rounded-xl text-xl bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
-                                }
-                                {
-                                    (draft.status == "drafting") &&
-                                    <div className="mt-4 rounded-xl text-xl bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
-                                }
-                                {
-                                    (draft.status == "finished") &&
-                                    <div className="mt-4 rounded-xl text-xl bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
-                                }
-                            </div>
                             </Link>
                         )
                     }
