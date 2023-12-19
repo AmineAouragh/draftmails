@@ -71,7 +71,8 @@ export default function NewDraft() {
 
     return (
         <div className="h-full py-4 px-2 relative w-full flex flex-col justify-center items-center">
-            <h1 className="text-6xl font-bold text-blue-600">Draftmails 📝</h1>
+            <h1 className="text-6xl font-bold text-blue-600">Draftmails</h1>
+            <p className="text-lg font-bold text-blue-800">by Amine</p>
             <div className="2xl:w-1/2 mx-auto flex flex-col">
               <div className="flex flex-row items-center justify-between w-full mt-8">
                 <div className="flex flex-row items-center mr-2 justify-between py-2 w-3/4 px-4 bg-blue-700 rounded-xl">
@@ -93,7 +94,7 @@ export default function NewDraft() {
                 wordCount >= 1 && <p className="bg-blue-50 font-semibold rounded-md px-5 py-3 text-blue-500 my-2 mr-2">Email length: {wordCount} words</p>
               }
               {
-                readingTime <= 1 &&
+                readingTime < 1 &&
                 <p className="bg-blue-50 font-semibold rounded-md px-5 py-3 text-blue-500 my-2 mr-2">Reading time: Less than a minute</p>
               }
               { readingTime >= 1 && <p className="bg-blue-50 font-semibold rounded-md px-5 py-3 text-blue-500 my-2">Reading time: About {readingTime} minutes</p> }
@@ -118,7 +119,7 @@ export default function NewDraft() {
                 onChange={handleEmailText} 
                 className=" px-3 py-2 text-xl border-2 border-blue-600 outline-none rounded-lg" rows={22} cols={24}>
               </textarea>
-              <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:scale-110 active:scale-100 border-blue-600 text-xl font-bold rounded-lg px-3 py-2 mt-4">Save</button>
+              <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:scale-110 active:scale-100 border-blue-600 text-xl font-bold rounded-lg px-3 py-2 mt-4">New draft</button>
             </div>
         </div>
     )

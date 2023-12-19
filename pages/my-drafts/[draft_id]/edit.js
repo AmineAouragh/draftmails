@@ -133,7 +133,7 @@ export default function EditDraft() {
                 onChange={handleEmailText}
                 className=" px-3 py-2 text-xl border-2 border-blue-600 outline-none rounded-lg" rows={22} cols={24}>
               </textarea>
-              <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:scale-110 active:scale-100 border-blue-600 text-xl font-bold rounded-lg px-3 py-2 mt-4">Save</button>
+              <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:scale-110 active:scale-100 border-blue-600 text-xl font-bold rounded-lg px-3 py-2 mt-4">Edit draft</button>
             </div>
         </div>
     )

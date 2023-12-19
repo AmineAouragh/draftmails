@@ -86,8 +86,9 @@ export default function Draft(){
                 <p className="rounded-2xl py-2 text-blue-500 text-xl font-bold mr-8">{writerName}</p>
                 <div>
                 <button type="button" onClick={() => handleCopyClick(emailText)} className="rounded-2xl bg-gray-100 text-gray-900 font-semibold text-xl px-5 py-2 mr-2">Copy</button>
-                <button type="button" onClick={editDraft} className="rounded-2xl bg-blue-50 text-blue-500 font-semibold text-xl px-5 py-2 mr-2">Edit</button>
-                <button type="button" onClick={deleteDraft} className="rounded-2xl bg-red-50 text-red-600 font-semibold text-xl px-5 py-2">Delete</button>
+                <button type="button" onClick={editDraft} className="rounded-2xl bg-yellow-50 text-yellow-700 font-semibold text-xl px-5 py-2 mr-2">Edit</button>
+                <button type="button" onClick={deleteDraft} className="rounded-2xl bg-red-50 text-red-600 font-semibold text-xl px-5 py-2 mr-2">Delete</button>
+                <button type="button" onClick={() => router.push("/my-drafts")} className="text-blue-600 font-semibold text-lg px-5 py-2 hover:bg-blue-50 rounded-2xl duration-700 transition">Drafts</button>
                 </div>
               </div>
               <p className="text-xl mt-4" dangerouslySetInnerHTML={{ __html: emailText }}></p>
