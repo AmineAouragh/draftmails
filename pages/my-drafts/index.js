@@ -9,7 +9,7 @@ export default function Drafts() {
     async function showDrafts(){
         let { data: drafts, error } = await supabase
         .from('drafts')
-        .select('id, subject_line, text')
+        .select('id, subject_line, text, status')
         .eq('writer_id', 1)
         setDrafts(drafts)
         console.log(drafts)
@@ -42,11 +42,23 @@ export default function Drafts() {
                         drafts.map(
                             draft =>
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id}>
-                            <div id={draft.id} className="rounded-md h-full flex flex-col justify-center items-center bg-blue-700 px-5 py-4">
+                            <div id={draft.id} className="relative rounded-md h-full flex flex-col justify-center items-center bg-blue-700 px-5 py-4">
                                 <h3 className="text-2xl text-gray-50 font-bold">{draft.subject_line}</h3>
-                                <div className="mt-6 rounded-md bg-gray-50 px-3 py-4">
+                                <div className="mt-4 rounded-md bg-gray-50 px-3 py-4">
                                     <p className="text-xl">{draft.text.slice(0, 200)}</p>
                                 </div>
+                                {
+                                    (draft.status == "planning") &&
+                                    <div className="mt-4 rounded-xl text-xl bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                }
+                                {
+                                    (draft.status == "drafting") &&
+                                    <div className="mt-4 rounded-xl text-xl bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                }
+                                {
+                                    (draft.status == "finished") &&
+                                    <div className="mt-4 rounded-xl text-xl bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                }
                             </div>
                             </Link>
                         )

@@ -1,4 +1,4 @@
-import { supabase } from '../api/supabase'
+import { supabase } from '../../api/supabase'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -11,7 +11,6 @@ export default function Draft(){
     const [ subjectLine, setSubjectLine ] = useState('')
     const [ emailText, setEmailText ] = useState('')
     const [ writerName, setWriterName ] = useState('')
-    const [ openDeleteConfirmation, setOpenDeleteConfirmation ] = useState(false)
 
     async function getDraftData(){
         let { data: drafts, error } = await supabase
@@ -70,6 +69,10 @@ export default function Draft(){
       router.push('/my-drafts')
     }
 
+    async function editDraft() {
+      router.push(`/my-drafts/${draft_id}/edit`)
+    }
+
     return (
         <div className="flex flex-col justify-center items-center relative w-full h-full px-2 py-8">
             <h2 className="text-6xl font-bold text-blue-600">
@@ -82,8 +85,9 @@ export default function Draft(){
               <div className="flex flex-row items-center justify-between mt-8">
                 <p className="rounded-2xl py-2 text-blue-500 text-xl font-bold mr-8">{writerName}</p>
                 <div>
-                <button type="button" onClick={() => handleCopyClick(emailText)} className="rounded-2xl bg-gray-100 text-gray-900 font-bold text-xl px-5 py-2 mr-2">Copy</button>
-                <button type="button" onClick={deleteDraft} className="rounded-2xl bg-red-50 text-red-600 font-bold text-xl px-5 py-2">Delete</button>
+                <button type="button" onClick={() => handleCopyClick(emailText)} className="rounded-2xl bg-gray-100 text-gray-900 font-semibold text-xl px-5 py-2 mr-2">Copy</button>
+                <button type="button" onClick={editDraft} className="rounded-2xl bg-blue-50 text-blue-500 font-semibold text-xl px-5 py-2 mr-2">Edit</button>
+                <button type="button" onClick={deleteDraft} className="rounded-2xl bg-red-50 text-red-600 font-semibold text-xl px-5 py-2">Delete</button>
                 </div>
               </div>
               <p className="text-xl mt-4" dangerouslySetInnerHTML={{ __html: emailText }}></p>

@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
-import { supabase } from './api/supabase'
+import { useRouter } from 'next/router'
+import { supabase } from '../../api/supabase'
 import Link from 'next/link'
 
-export default function NewDraft() {
+export default function EditDraft() {
+
+    const router = useRouter()
+    const { draft_id } = router.query
 
     const [ subjectLine, setSubjectLine ] = useState('')
     const [ emailText, setEmailText ] = useState('')
     const [ drafts, setDrafts ] = useState([])
     const [ wordCount, setWordCount ] = useState(0)
     const [ readingTime, setReadingTime ] = useState(0)
-    const [ status, setStatus ] = useState('planning')
+    const [ status, setStatus ] = useState('writing')
 
     function handleEmailText(e) {
       setEmailText(e.target.value)
@@ -18,14 +22,14 @@ export default function NewDraft() {
       calculateReadingTime()
     }
 
-
     function calculateReadingTime(){
       let wpm = 180
       let reading_time = (wordCount / wpm).toFixed(2)
       setReadingTime(reading_time)
     }
 
-    async function insertNewDraft(){
+    async function editDraft(){
+        
       if (subjectLine == '') {
         let subject_line = ''
         if (drafts.length == 0) {
@@ -36,15 +40,13 @@ export default function NewDraft() {
         setSubjectLine(subject_line)
         const { data, error } = await supabase
         .from('drafts')
-        .insert([
-          { subject_line: subject_line, text: emailText, status: status, writer_id: 1 }
-        ])
+        .update({ subject_line: subjectLine, text: emailText })
+        .eq('id', draft_id)
       } else {
         const { data, error } = await supabase
         .from('drafts')
-        .insert([
-          { subject_line: subjectLine, text: emailText, status: status, writer_id: 1 }
-        ])
+        .update({ subject_line: subjectLine, text: emailText })
+        .eq('id', draft_id)
       }
     }
 
@@ -57,15 +59,29 @@ export default function NewDraft() {
         )
       `)
       setDrafts(drafts)
+      
+    }
+
+    async function getDraftData() {
+        let { data: drafts, error } = await supabase
+        .from('drafts')
+        .select('subject_line, text')
+        .eq('id', draft_id)
+        setEmailText(drafts[0].text)
+        setSubjectLine(drafts[0].subject_line)
     }
 
     useEffect(() => {
       getDrafts()
     }, [])
 
+    useEffect(() => {
+        getDraftData()
+    }, [])
+
     function addNewDraft() {
       if (emailText.length >= 2) {
-        insertNewDraft()
+        editDraft()
       }
     }
 
@@ -99,23 +115,22 @@ export default function NewDraft() {
               { readingTime >= 1 && <p className="bg-blue-50 font-semibold rounded-md px-5 py-3 text-blue-500 my-2">Reading time: About {readingTime} minutes</p> }
               </div>
               <div className="rounded-md py-2">
-                <label htmlFor="status" className="font-semibold text-xl text-blue-600 mr-2">Status</label> 
+                <label htmlFor="status" className="font-semibold text-xl text-blue-400 mr-2">Status</label> 
                 <select 
                   id="status" 
                   value={status} 
-                 
                   onChange={e => setStatus(e.target.value)} 
-                  className="outline-none font-semibold text-lg text-gray-50 bg-blue-500 px-2 py-1 rounded-md">
-                  <option value="planning" className="font-semibold">Idea/Planning</option>
-                  <option value="drafting" className="font-semibold">Drafting</option>
-                  <option value="finished" className="font-semibold">Finished</option>
+                  className="outline-none font-semibold bg-blue-500 text-lg px-2 py-1 rounded-md">
+                  <option value="planning">Idea/Planning</option>
+                  <option value="drafting">Drafting</option>
+                  <option value="finished">Finished</option>
                 </select>
               </div>
               </div>
               <textarea 
                 value={emailText} 
                 placeholder='What are you thinking about today?' 
-                onChange={handleEmailText} 
+                onChange={handleEmailText}
                 className=" px-3 py-2 text-xl border-2 border-blue-600 outline-none rounded-lg" rows={22} cols={24}>
               </textarea>
               <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:scale-110 active:scale-100 border-blue-600 text-xl font-bold rounded-lg px-3 py-2 mt-4">Save</button>
