@@ -87,7 +87,8 @@ export default function EditDraft() {
 
     return (
         <div className="h-full py-4 px-2 relative w-full flex flex-col justify-center items-center">
-            <h1 className="text-6xl font-bold text-blue-600">Draftmails 📝</h1>
+            <h1 className="text-6xl font-bold text-blue-600">Draftmails</h1>
+            <p className="text-lg font-bold text-blue-800">by Amine</p>
             <div className="2xl:w-1/2 mx-auto flex flex-col">
               <div className="flex flex-row items-center justify-between w-full mt-8">
                 <div className="flex flex-row items-center mr-2 justify-between py-2 w-3/4 px-4 bg-blue-700 rounded-xl">

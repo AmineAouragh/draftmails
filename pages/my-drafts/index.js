@@ -27,7 +27,8 @@ export default function Drafts() {
 
     return (
         <div className="h-full py-4 px-2 relative w-full flex flex-col justify-center items-center">
-            <h1 className="text-6xl font-bold text-blue-600">Draftmails 📝</h1>
+            <h1 className="text-6xl font-bold text-blue-600">Draftmails</h1>
+            <p className="text-lg font-bold text-blue-800">by Amine</p>
             <div className="mt-24 2xl:w-2/3">
                 <h2 className="text-4xl font-bold text-blue-600">Drafts</h2>
                 <hr className="w-full h-1 border-0 bg-blue-50 mt-6" />

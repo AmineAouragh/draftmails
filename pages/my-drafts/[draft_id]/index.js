@@ -77,9 +77,10 @@ export default function Draft(){
         <div className="flex flex-col justify-center items-center relative w-full h-full px-2 py-8">
             <h2 className="text-6xl font-bold text-blue-600">
               <Link href="/new-draft">
-              Draftmails 📝
+              Draftmails
               </Link>
             </h2>
+            <p className="text-lg font-bold text-blue-800">by Amine</p>
             <div className="2xl:w-1/2 rounded-md border-2 border-blue-600 px-6 py-3 mt-8">
               <h1 className="text-4xl text-gray-50 bg-blue-600 px-3 py-2 font-bold text-center">{subjectLine}</h1>
               <div className="flex flex-row items-center justify-between mt-8">
