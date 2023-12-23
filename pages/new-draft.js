@@ -37,13 +37,13 @@ export default function NewDraft() {
         const { data, error } = await supabase
         .from('drafts')
         .insert([
-          { subject_line: subject_line, text: emailText, status: status, writer_id: 1 }
+          { subject_line: subject_line, text: emailText, status: status, length: wordCount, writer_id: 1 }
         ])
       } else {
         const { data, error } = await supabase
         .from('drafts')
         .insert([
-          { subject_line: subjectLine, text: emailText, status: status, writer_id: 1 }
+          { subject_line: subjectLine, text: emailText, status: status, length: wordCount, writer_id: 1 }
         ])
       }
     }
@@ -117,7 +117,7 @@ export default function NewDraft() {
                 value={emailText} 
                 placeholder='What are you thinking about today?' 
                 onChange={handleEmailText} 
-                className=" px-3 py-2 text-xl border-2 border-blue-600 outline-none rounded-lg" rows={22} cols={24}>
+                className=" px-3 py-2 text-xl border-2 border-blue-600 outline-none rounded-lg scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-50" rows={22} cols={24}>
               </textarea>
               <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:scale-110 active:scale-100 border-blue-600 text-xl font-bold rounded-lg px-3 py-2 mt-4">New draft</button>
             </div>
