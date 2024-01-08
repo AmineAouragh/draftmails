@@ -41,6 +41,12 @@ export default function Draft(){
     }, [])
 
     function buildDraftLink(){
+      let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      let code = ""
+      while (code.length < 15) {
+        code += Math.random(numbers)
+      }
+
       let formatted_name = ""
       if (writerName.split(" ").length > 1) {
         formatted_name = writerName.split(" ").join("-").toLowerCase()
@@ -53,7 +59,7 @@ export default function Draft(){
       } else {
         formatted_subject_line = subjectLine
       }
-      let draft_link = `${formatted_name}/${draft_id}/${formatted_subject_line}`
+      let draft_link = `${formatted_name}/secret-draft-${code}`
       console.log(draft_link)
       alert("Your secret draft link was created. Anybody who has the secret draft link can view the draft." + "\n" +draft_link)
     }
