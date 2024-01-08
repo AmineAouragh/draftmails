@@ -13,7 +13,7 @@ export default function EditDraft() {
     const [ drafts, setDrafts ] = useState([])
     const [ wordCount, setWordCount ] = useState(0)
     const [ readingTime, setReadingTime ] = useState(0)
-    const [ status, setStatus ] = useState('writing')
+    const [ status, setStatus ] = useState('planning')
 
     function handleEmailText(e) {
       setEmailText(e.target.value)
@@ -40,12 +40,12 @@ export default function EditDraft() {
         setSubjectLine(subject_line)
         const { data, error } = await supabase
         .from('drafts')
-        .update({ subject_line: subjectLine, text: emailText })
+        .update({ subject_line: subjectLine, text: emailText, length: wordCount, status: status })
         .eq('id', draft_id)
       } else {
         const { data, error } = await supabase
         .from('drafts')
-        .update({ subject_line: subjectLine, text: emailText })
+        .update({ subject_line: subjectLine, text: emailText, length: wordCount, status: status })
         .eq('id', draft_id)
       }
     }
@@ -110,7 +110,7 @@ export default function EditDraft() {
                 wordCount >= 1 && <p className="bg-blue-50 font-semibold rounded-md px-5 py-3 text-blue-500 my-2 mr-2">Email length: {wordCount} words</p>
               }
               {
-                readingTime <= 1 &&
+                readingTime < 1 &&
                 <p className="bg-blue-50 font-semibold rounded-md px-5 py-3 text-blue-500 my-2 mr-2">Reading time: Less than a minute</p>
               }
               { readingTime >= 1 && <p className="bg-blue-50 font-semibold rounded-md px-5 py-3 text-blue-500 my-2">Reading time: About {readingTime} minutes</p> }
@@ -128,11 +128,13 @@ export default function EditDraft() {
                 </select>
               </div>
               </div>
+              
               <textarea 
                 value={emailText} 
                 placeholder='What are you thinking about today?' 
                 onChange={handleEmailText}
-                className=" px-3 py-2 text-xl border-2 border-blue-600 outline-none rounded-lg" rows={22} cols={24}>
+                className=" px-3 py-2 text-xl border-2 border-blue-600 outline-none rounded-lg scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-50" rows={22} cols={24}>
+                
               </textarea>
               <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:scale-110 active:scale-100 border-blue-600 text-xl font-bold rounded-lg px-3 py-2 mt-4">Edit draft</button>
             </div>
