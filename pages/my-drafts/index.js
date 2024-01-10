@@ -47,7 +47,7 @@ export default function Drafts() {
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id}>
                                 <div id={draft.id} className="h-full shadow-lg shadow-blue-500 flex flex-col justify-between bg-blue-700 rounded-md px-5 py-4">
                                   <div className="flex flex-col justify-center items-center">
-                                    <h3 className="text-2xl text-center text-gray-50 font-bold">{draft.subject_line}</h3>
+                                    <h3 className="text-xl text-center text-gray-50 font-bold">{draft.subject_line}</h3>
                                     <div className="mt-4 rounded-md bg-gray-50 px-3 py-4">
                                       <p className="text-xl">{draft.text.slice(0, 200)}</p>
                                     </div>
