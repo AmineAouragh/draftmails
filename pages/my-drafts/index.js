@@ -63,7 +63,7 @@ export default function Drafts() {
                                   <div className="flex flex-col justify-center items-center">
                                     <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
                                     <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
-                                      <p className="text-xl font-semibold">{draft.text.length > 200 ? draft.text.slice(0, 200) + "- See more" : draft.text}</p>
+                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "- See more" : draft.text}</p>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center justify-between">
