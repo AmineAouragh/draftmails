@@ -59,11 +59,11 @@ export default function Drafts() {
                         drafts.map(
                             draft =>
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id}>
-                                <div id={draft.id} className="h-full shadow-lg shadow-blue-500 flex flex-col justify-between bg-blue-700 rounded-md px-5 py-4">
+                                <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
                                   <div className="flex flex-col justify-center items-center">
-                                    <h3 className="text-xl text-center text-gray-50 font-bold">{draft.subject_line}</h3>
-                                    <div className="mt-4 rounded-md bg-gray-50 px-3 py-4">
-                                      <p className="text-xl">{draft.text.slice(0, 200)}</p>
+                                    <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
+                                      <p className="text-xl font-semibold">{draft.text.length > 200 ? draft.text.slice(0, 200) + "- See more" : draft.text}</p>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center justify-between">
