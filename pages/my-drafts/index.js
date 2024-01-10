@@ -40,7 +40,7 @@ export default function Drafts() {
                         value={filteredBy}
                         onChange={e => setFilteredBy(e.target.value)}
                         className="outline-none font-bold bg-blue-50 text-blue-600 text-2xl px-3 py-2 rounded-xl">
-                        <option value="all" className="font-semibold">/all</option>
+                        <option value="all" className="font-semibold">/all </option>
                         <option value="planning" className="font-semibold">/planning</option>
                         <option value="drafting" className="font-semibold">/drafting</option>
                         <option value="finished" className="font-semibold">/finished</option>
