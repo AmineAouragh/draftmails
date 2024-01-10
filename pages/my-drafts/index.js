@@ -30,7 +30,9 @@ export default function Drafts() {
             <h1 className="text-6xl font-bold text-blue-600">Draftmails</h1>
             <p className="text-lg font-bold text-blue-800">by Amine</p>
             <div className="mt-24 2xl:w-2/3">
-                <h2 className="text-4xl font-bold text-blue-600">Drafts</h2>
+                <div className="text-4xl font-bold text-blue-600">
+                  Drafts <span className="bg-blue-800 text-blue-50 rounded-xl px-4 py-1">{drafts.length}</span>
+                </div>
                 <hr className="w-full h-1 border-0 bg-blue-50 mt-6" />
                 <Link href="/new-draft">
                   <button type="button" className="mt-8 hidden bg-blue-50 text-blue-600 font-bold text-2xl px-5 py-5 rounded-md">+ Start a new draft</button>
