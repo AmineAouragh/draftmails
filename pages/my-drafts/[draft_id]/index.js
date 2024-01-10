@@ -127,7 +127,7 @@ export default function Draft(){
                 <p className="rounded-2xl px-2 py-1 bg-gray-600 text-gray-50 font-semibold mr-2">{wordCount} words</p>
                 <p className="rounded-2xl px-2 py-1 bg-gray-100 text-gray-600 font-semibold">{status}</p>
               </div>
-              <p className="text-xl rounded-md p-2 bg-blue-50 mt-4" dangerouslySetInnerHTML={{ __html: emailText }}></p>
+              <p className="text-xl rounded-md p-2 mt-4" dangerouslySetInnerHTML={{ __html: emailText }}></p>
             </div>
         </div>
     )
