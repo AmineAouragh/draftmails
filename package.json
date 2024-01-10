@@ -1,5 +1,6 @@
 {
-  "name": "newsletter",
+  "name": "draftmails",
+  "description": "tool to help draft and organize newsletter emails",
   "version": "0.1.0",
   "private": true,
   "scripts": {

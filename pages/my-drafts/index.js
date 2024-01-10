@@ -5,6 +5,7 @@ import Link from 'next/link'
 export default function Drafts() {
 
     const [ drafts, setDrafts ] = useState([])
+    const [ filteredBy, setFilteredBy ] = useState('all')
 
     async function showDrafts(){
         let { data: drafts, error } = await supabase
@@ -30,8 +31,21 @@ export default function Drafts() {
             <h1 className="text-6xl font-bold text-blue-600">Draftmails</h1>
             <p className="text-lg font-bold text-blue-800">by Amine</p>
             <div className="mt-24 2xl:w-2/3">
-                <div className="text-4xl font-bold text-blue-600">
-                  Drafts <span className="bg-blue-600 text-gray-50 rounded-xl px-4 py-1">{drafts.length}</span>
+                <div className="flex flex-row items-center justify-between">
+                  <p className="text-4xl font-bold text-blue-600">Drafts <span className="bg-blue-600 text-gray-50 rounded-xl px-4 py-1">{drafts.length}</span></p>
+                  <div className="rounded-md py-2">
+                      <label htmlFor="status" className="font-bold text-2xl text-blue-600 mr-2">Filter by:</label> 
+                      <select 
+                        id="status" 
+                        value={filteredBy}
+                        onChange={e => setFilteredBy(e.target.value)}
+                        className="outline-none font-bold bg-blue-50 text-blue-600 text-2xl px-3 py-2 rounded-xl">
+                        <option value="all" className="font-semibold">/all</option>
+                        <option value="planning" className="font-semibold">/planning</option>
+                        <option value="drafting" className="font-semibold">/drafting</option>
+                        <option value="finished" className="font-semibold">/finished</option>
+                      </select>
+                  </div>
                 </div>
                 <hr className="w-full h-1 border-0 bg-blue-50 mt-6" />
                 <Link href="/new-draft">
