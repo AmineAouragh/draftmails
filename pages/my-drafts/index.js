@@ -31,7 +31,7 @@ export default function Drafts() {
             <p className="text-lg font-bold text-blue-800">by Amine</p>
             <div className="mt-24 2xl:w-2/3">
                 <div className="text-4xl font-bold text-blue-600">
-                  Drafts <span className="bg-blue-800 text-blue-50 rounded-xl px-4 py-1">{drafts.length}</span>
+                  Drafts <span className="bg-blue-600 text-gray-50 rounded-xl px-4 py-1">{drafts.length}</span>
                 </div>
                 <hr className="w-full h-1 border-0 bg-blue-50 mt-6" />
                 <Link href="/new-draft">
