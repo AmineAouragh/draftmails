@@ -39,7 +39,7 @@ export default function Drafts() {
                         id="status" 
                         value={filteredBy}
                         onChange={e => setFilteredBy(e.target.value)}
-                        className="outline-none font-bold bg-blue-50 text-blue-600 text-2xl px-3 py-2 rounded-xl">
+                        className="outline-none font-bold border-2 border-blue-100 focus:border-blue-500 bg-blue-50 text-blue-600 text-2xl px-3 py-2 rounded-xl">
                         <option value="all" className="font-semibold">/all </option>
                         <option value="planning" className="font-semibold">/planning</option>
                         <option value="drafting" className="font-semibold">/drafting</option>
@@ -63,7 +63,7 @@ export default function Drafts() {
                                   <div className="flex flex-col justify-center items-center">
                                     <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
                                     <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
-                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "- See more" : draft.text}</p>
+                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
                                   </div>
                                   <div className="flex flex-row items-center justify-between">
