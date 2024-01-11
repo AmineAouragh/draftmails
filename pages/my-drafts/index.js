@@ -56,6 +56,7 @@ export default function Drafts() {
                         + Start a new draft
                     </Link>
                     {
+                      filteredBy == "all" &&
                         drafts.map(
                             draft =>
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id}>
@@ -83,6 +84,69 @@ export default function Drafts() {
                                 </div>
                             </Link>
                         )
+                    }
+                    {
+                      filteredBy == "planning" &&
+                        drafts.map(
+                            draft =>
+                            
+                            <Link href={`/my-drafts/${draft.id}`} key={draft.id} className={`${draft.status == "planning" ? '' : 'hidden'}`}>
+                                <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
+                                  <div className="flex flex-col justify-center items-center">
+                                    <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
+                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
+                                    </div>
+                                  </div>
+                                  <div className="flex flex-row items-center justify-between">
+                                    <div className="mt-4 rounded-3xl text-lg bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                  </div>
+                                </div>
+                            </Link>
+                            
+                        )   
+                    }
+                    {
+                      filteredBy == "drafting" &&
+                        drafts.map(
+                            draft =>
+                            
+                            <Link href={`/my-drafts/${draft.id}`} key={draft.id} className={`${draft.status == "drafting" ? '' : 'hidden'}`}>
+                                <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
+                                  <div className="flex flex-col justify-center items-center">
+                                    <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
+                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
+                                    </div>
+                                  </div>
+                                  <div className="flex flex-row items-center justify-between">
+                                    <div className="mt-4 rounded-3xl text-lg bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                  </div>
+                                </div>
+                            </Link>
+                            
+                        )   
+                    }
+                    {
+                      filteredBy == "finished" &&
+                        drafts.map(
+                            draft =>
+                            
+                            <Link href={`/my-drafts/${draft.id}`} key={draft.id} className={`${draft.status == "finished" ? '' : 'hidden'}`}>
+                                <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
+                                  <div className="flex flex-col justify-center items-center">
+                                    <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
+                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
+                                    </div>
+                                  </div>
+                                  <div className="flex flex-row items-center justify-between">
+                                    <div className="mt-4 rounded-3xl text-lg bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                  </div>
+                                </div>
+                            </Link>
+                            
+                        )   
                     }
                 </div>
             </div>
