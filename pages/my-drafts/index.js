@@ -40,10 +40,12 @@ export default function Drafts() {
                         value={filteredBy}
                         onChange={e => setFilteredBy(e.target.value)}
                         className="outline-none font-bold border-2 border-blue-100 focus:border-blue-500 bg-blue-50 text-blue-600 text-2xl px-3 py-2 rounded-xl">
+                        <optgroup label="Status">
                         <option value="all" className="font-semibold">/all </option>
                         <option value="planning" className="font-semibold">/planning</option>
                         <option value="drafting" className="font-semibold">/drafting</option>
                         <option value="finished" className="font-semibold">/finished</option>
+                        </optgroup>
                       </select>
                   </div>
                 </div>
