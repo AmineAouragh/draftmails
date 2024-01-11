@@ -16,15 +16,21 @@ export default function Drafts() {
         .select('id, subject_line, text, status')
         .eq('writer_id', 1)
         setDrafts(drafts)
+        let planning = 0
+        let drafting = 0
+        let finished = 0
         for (var draft of drafts){
-          if (draft.status == "planned"){
-            setPlannedCount(plannedCount++)
+          if (draft.status == "planning"){
+            planning++
           } else if (draft.status == "drafting"){
-            setDraftingCount(draftingCount++)
+            drafting++
           } else if (draft.status == "finished"){
-            setFinishedCount(finishedCount++)
+            finished++
           }
         }
+        setPlannedCount(planning)
+        setDraftingCount(drafting)
+        setFinishedCount(finished)
         console.log(drafts)
     }
 
@@ -44,7 +50,15 @@ export default function Drafts() {
             <p className="text-lg font-bold text-blue-800">by Amine</p>
             <div className="mt-24 2xl:w-2/3">
                 <div className="flex flex-row items-center justify-between">
-                  <p className="text-4xl font-bold text-blue-600">Drafts <span className="bg-blue-600 text-gray-50 rounded-xl px-4 py-1">{drafts.length}</span></p>
+                  <p className="text-4xl font-bold text-blue-600">
+                    Drafts 
+                    <span className="bg-blue-600 text-gray-50 rounded-xl ml-2 px-4 py-1">
+                      { filteredBy == "all" && drafts.length }
+                      { filteredBy == "planning" && plannedCount }
+                      { filteredBy == "drafting" && draftingCount }
+                      { filteredBy == "finished" && finishedCount }
+                    </span>
+                  </p>
                   <div className="rounded-md py-2">
                       <label htmlFor="status" className="font-bold text-2xl text-blue-600 mr-2">Filter by:</label> 
                       <select 
