@@ -6,6 +6,9 @@ export default function Drafts() {
 
     const [ drafts, setDrafts ] = useState([])
     const [ filteredBy, setFilteredBy ] = useState('all')
+    const [ plannedCount, setPlannedCount ] = useState(0)
+    const [ draftingCount, setDraftingCount ] = useState(0)
+    const [ finishedCount, setFinishedCount ] = useState(0)
 
     async function showDrafts(){
         let { data: drafts, error } = await supabase
@@ -13,6 +16,15 @@ export default function Drafts() {
         .select('id, subject_line, text, status')
         .eq('writer_id', 1)
         setDrafts(drafts)
+        for (var draft of drafts){
+          if (draft.status == "planned"){
+            setPlannedCount(plannedCount++)
+          } else if (draft.status == "drafting"){
+            setDraftingCount(draftingCount++)
+          } else if (draft.status == "finished"){
+            setFinishedCount(finishedCount++)
+          }
+        }
         console.log(drafts)
     }
 
