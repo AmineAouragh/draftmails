@@ -14,6 +14,13 @@ export default function Draft(){
     const [ wordCount, setWordCount ] = useState('')
     const [ status, setStatus ] = useState('')
 
+    function formatText(text){
+      let format_new_line = text.replace(/\n/g, '<br />')
+      let format_bold = format_new_line.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      let formatted_text = format_bold // this should combine format_new_line and format_bold
+      return formatted_text
+    }
+
     async function getDraftData(){
         let { data: drafts, error } = await supabase
         .from('drafts')
@@ -28,7 +35,9 @@ export default function Draft(){
         `)
         .eq('id', draft_id)
         setSubjectLine(drafts[0].subject_line)
-        let formatted_text = drafts[0].text.replace(/\n/g, '<br />')
+        //let formatted_text = drafts[0].text.replace(/\n/g, '<br />')
+        let format_bold = drafts[0].text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        let formatted_text = formatText(drafts[0].text)
         setEmailText(formatted_text)
         setWriterName(drafts[0].writer_id.name)
         setWordCount(drafts[0].length)
