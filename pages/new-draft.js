@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { supabase } from './api/supabase'
 import Link from 'next/link'
 
 export default function NewDraft() {
+
+    const router = useRouter()
 
     const [ subjectLine, setSubjectLine ] = useState('')
     const [ emailText, setEmailText ] = useState('')
@@ -27,13 +30,7 @@ export default function NewDraft() {
 
     async function insertNewDraft(){
       if (subjectLine == '') {
-        let subject_line = ''
-        if (drafts.length == 0) {
-          subject_line = "Email #1"
-        } else {
-          subject_line = drafts[0].writer_id.newsletter + " email #" + drafts.length+1
-        }
-        setSubjectLine(subject_line)
+        let subject_line = "Untitled"
         const { data, error } = await supabase
         .from('drafts')
         .insert([
@@ -66,6 +63,7 @@ export default function NewDraft() {
     function addNewDraft() {
       if (emailText.length >= 2) {
         insertNewDraft()
+        setTimeout(() => router.push('/my-drafts'), 1000)
       }
     }
 
@@ -104,7 +102,6 @@ export default function NewDraft() {
                 <select 
                   id="status" 
                   value={status} 
-                 
                   onChange={e => setStatus(e.target.value)} 
                   className="outline-none font-semibold text-lg text-gray-50 bg-blue-500 px-2 py-1 rounded-md">
                   <option value="planning" className="font-semibold">Idea/Planning</option>
@@ -113,13 +110,17 @@ export default function NewDraft() {
                 </select>
               </div>
               </div>
-              <textarea 
-                value={emailText} 
-                placeholder='What are you thinking about today?' 
-                onChange={handleEmailText} 
-                className=" px-3 py-2 text-xl border-2 border-blue-600 outline-none rounded-lg scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-50" rows={22} cols={24}>
-              </textarea>
-              <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:scale-110 active:scale-100 border-blue-600 text-xl font-bold rounded-lg px-3 py-2 mt-4">New draft</button>
+              <div className="flex flex-col border-4 border-blue-600 rounded-lg">
+                <textarea 
+                  value={emailText} 
+                  placeholder='What are you thinking about today?' 
+                  onChange={handleEmailText} 
+                  className="text-xl font-semibold text-blue-900 rounded-lg px-3 pt-2 outline-none scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-blue-50" rows={20} cols={24}>
+                </textarea>
+                <div className="bg-blue-50 px-2 py-4 rounded-bl-lg rounded-br-lg">
+                  <button type="button" onClick={addNewDraft} className="bg-blue-600 text-gray-50 border-4 transition duration-600 hover:bg-blue-700 hover:border-blue-700 border-blue-600 text-xl font-bold rounded-lg px-3 py-2">New draft</button>
+                </div>
+              </div>
             </div>
         </div>
     )
