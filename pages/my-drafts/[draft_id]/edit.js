@@ -14,7 +14,7 @@ export default function EditDraft() {
     const [ drafts, setDrafts ] = useState([])
     const [ wordCount, setWordCount ] = useState(0)
     const [ readingTime, setReadingTime ] = useState(0)
-    const [ status, setStatus ] = useState('planning')
+    const [ status, setStatus ] = useState('')
 
     function handleEmailText(e) {
       setEmailText(e.target.value)
@@ -66,10 +66,12 @@ export default function EditDraft() {
     async function getDraftData() {
         let { data: drafts, error } = await supabase
         .from('drafts')
-        .select('subject_line, text')
+        .select('subject_line, text, length, status')
         .eq('id', draft_id)
         setEmailText(drafts[0].text)
         setSubjectLine(drafts[0].subject_line)
+        setWordCount(drafts[0].length)
+        setStatus(drafts[0].status)
     }
 
     useEffect(() => {
