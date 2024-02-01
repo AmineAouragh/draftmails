@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../api/supabase'
 import Link from 'next/link'
+import Head from 'next/head'
 
 export default function Drafts() {
 
@@ -8,7 +9,6 @@ export default function Drafts() {
     const [ filteredBy, setFilteredBy ] = useState('all')
     const [ plannedCount, setPlannedCount ] = useState(0)
     const [ draftingCount, setDraftingCount ] = useState(0)
-    const [ draftLength, setDraftLength ] = useState(0)
     const [ finishedCount, setFinishedCount ] = useState(0)
 
     async function showDrafts(){
@@ -46,9 +46,14 @@ export default function Drafts() {
     }, [])
 
     return (
+      <>
+        <Head>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet" />
+            <title>Draftmails</title>
+        </Head>
         <div className="h-full py-4 px-2 relative w-full flex flex-col justify-center items-center">
-            <h1 className="text-6xl font-bold text-blue-600">Draftmails</h1>
-            <p className="text-lg font-bold text-blue-800">by Amine</p>
+            <h1 className="text-8xl font-bold font-poppins text-blue-600">Draftmails</h1>
+            <p className="text-2xl font-bold text-blue-800">by Amine</p>
             <div className="mt-24 2xl:w-2/3">
                 <div className="flex flex-row items-center justify-between">
                   <p className="text-4xl font-bold text-blue-600">
@@ -77,10 +82,19 @@ export default function Drafts() {
                   </div>
                 </div>
                 <hr className="w-full h-1 border-0 bg-blue-50 mt-6" />
+                {
+                  filteredBy == "all" && <p className="mt-4 text-gray-600 text-lg">All your drafts</p>
+                }
+                {
+                  filteredBy == "planning" && <p className="mt-4 text-gray-600 text-lg"><span className="font-bold text-blue-600">{plannedCount} drafts</span> in early stage: brainstorming, writing notes down, outlining...</p>
+                }
+                {
+                  filteredBy == "finished" && <p className="mt-4 text-gray-600 font-bold text-lg"><span className="font-bold text-green-600">{finishedCount} drafts</span> are finished and ready to be sent. One last review and you&apos;re good to go!</p>
+                }
                 <Link href="/new-draft">
                   <button type="button" className="mt-8 hidden bg-blue-50 text-blue-600 font-bold text-2xl px-5 py-5 rounded-md">+ Start a new draft</button>
                 </Link>
-                <div className="mt-16 grid grid-cols-1 grid-rows-9 xl:grid-cols-3 xl:grid-rows-3 gap-8">
+                <div className="mt-10 grid grid-cols-1 grid-rows-9 xl:grid-cols-3 xl:grid-rows-3 gap-8">
                     <Link href="/new-draft" className='bg-blue-50 transition duration-700 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg hover:shadow-blue-300 text-blue-600 text-2xl font-bold rounded-md h-full flex flex-col justify-center items-center px-5 py-5'>
                         + Start a new draft
                     </Link>
@@ -91,10 +105,10 @@ export default function Drafts() {
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id}>
                                 <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
                                   <div className="flex flex-col justify-center items-center">
-                                    <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <h3 className="text-xl text-center font-poppins text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
                                     <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
-                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
-                                    </div>
+                                      <p className="text-xl font-poppins font-medium">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
+                                    </div> 
                                   </div>
                                   <div className="flex flex-row mt-4 items-center justify-between">
                                     {
@@ -123,9 +137,9 @@ export default function Drafts() {
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id} className={`${draft.status == "planning" ? '' : 'hidden'}`}>
                                 <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
                                   <div className="flex flex-col justify-center items-center">
-                                    <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <h3 className="text-xl text-center font-poppins text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
                                     <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
-                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
+                                      <p className="text-xl font-medium font-poppins">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
                                   </div>
                                   <div className="flex mt-4 flex-row items-center justify-between">
@@ -145,9 +159,9 @@ export default function Drafts() {
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id} className={`${draft.status == "drafting" ? '' : 'hidden'}`}>
                                 <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
                                   <div className="flex flex-col justify-center items-center">
-                                    <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <h3 className="text-xl text-center font-poppins text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
                                     <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
-                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
+                                      <p className="text-xl font-medium font-poppins">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
                                   </div>
                                   <div className="flex mt-4 flex-row items-center justify-between">
@@ -167,9 +181,9 @@ export default function Drafts() {
                             <Link href={`/my-drafts/${draft.id}`} key={draft.id} className={`${draft.status == "finished" ? '' : 'hidden'}`}>
                                 <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
                                   <div className="flex flex-col justify-center items-center">
-                                    <h3 className="text-xl text-center text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <h3 className="text-xl text-center font-poppins text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
                                     <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
-                                      <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
+                                      <p className="text-xl font-medium font-poppins">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
                                   </div>
                                   <div className="flex mt-4 flex-row items-center justify-between">
@@ -184,5 +198,7 @@ export default function Drafts() {
                 </div>
             </div>
         </div>
+        
+      </>
     )
 }
