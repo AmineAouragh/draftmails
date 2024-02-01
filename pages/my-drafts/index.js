@@ -129,8 +129,8 @@ export default function Drafts() {
                                     </div>
                                   </div>
                                   <div className="flex mt-4 flex-row items-center justify-between">
-                                    <div className="rounded-3xl text-lg bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
-                                    <p className="text-blue-50 text-lg font-bold">{draft.length + " words"}</p>
+                                    <div className="rounded-xl text-lg bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                    <p className="text-blue-50 bg-blue-500 rounded-xl px-3 py-2 text-lg font-bold">{draft.length + " words"}</p>
                                   </div>
                                 </div>
                             </Link>
@@ -151,8 +151,8 @@ export default function Drafts() {
                                     </div>
                                   </div>
                                   <div className="flex mt-4 flex-row items-center justify-between">
-                                    <div className="rounded-3xl text-lg bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
-                                    <p className="text-blue-50 text-lg font-bold">{draft.length + " words"}</p>
+                                    <div className="rounded-xl text-lg bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                    <p className="text-blue-50 bg-blue-500 rounded-xl px-3 py-2 text-lg font-bold">{draft.length + " words"}</p>
                                   </div>
                                 </div>
                             </Link>
