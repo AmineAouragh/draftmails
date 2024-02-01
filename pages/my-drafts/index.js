@@ -173,8 +173,8 @@ export default function Drafts() {
                                     </div>
                                   </div>
                                   <div className="flex mt-4 flex-row items-center justify-between">
-                                    <div className="rounded-3xl text-lg bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
-                                    <p className="text-blue-50 text-lg font-bold">{draft.length + " words"}</p>
+                                    <div className="rounded-xl text-lg bg-green-500 text-gray-50 px-3 py-2 font-semibold">{draft.status}</div>
+                                    <p className="text-blue-50 text-lg font-bold bg-blue-500 px-3 py-2 rounded-xl">{draft.length + " words"}</p>
                                   </div>
                                 </div>
                             </Link>

@@ -12,7 +12,7 @@ export default function EditDraft() {
     const [ subjectLine, setSubjectLine ] = useState('')
     const [ emailText, setEmailText ] = useState('')
     const [ drafts, setDrafts ] = useState([])
-    const [ wordCount, setWordCount ] = useState(0)
+    const [ wordCount, setWordCount ] = useState()
     const [ readingTime, setReadingTime ] = useState(0)
     const [ status, setStatus ] = useState('')
 
