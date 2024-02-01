@@ -8,12 +8,13 @@ export default function Drafts() {
     const [ filteredBy, setFilteredBy ] = useState('all')
     const [ plannedCount, setPlannedCount ] = useState(0)
     const [ draftingCount, setDraftingCount ] = useState(0)
+    const [ draftLength, setDraftLength ] = useState(0)
     const [ finishedCount, setFinishedCount ] = useState(0)
 
     async function showDrafts(){
         let { data: drafts, error } = await supabase
         .from('drafts')
-        .select('id, subject_line, text, status')
+        .select('id, subject_line, text, status, length')
         .eq('writer_id', 1)
         setDrafts(drafts)
         let planning = 0
@@ -95,19 +96,20 @@ export default function Drafts() {
                                       <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
                                   </div>
-                                  <div className="flex flex-row items-center justify-between">
+                                  <div className="flex flex-row mt-4 items-center justify-between">
                                     {
                                       (draft.status == "planning") &&
-                                      <div className="mt-4 rounded-3xl text-lg bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                      <div className="rounded-3xl text-lg bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
                                     }
                                     {
                                       (draft.status == "drafting") &&
-                                      <div className="mt-4 rounded-3xl text-lg bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                      <div className="rounded-3xl text-lg bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
                                     }
                                     {
                                       (draft.status == "finished") &&
-                                      <div className="mt-4 rounded-3xl text-lg bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                      <div className="rounded-3xl text-lg bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
                                     }
+                                    <p className="text-blue-50 text-lg font-bold">{draft.length + " words"}</p>
                                   </div>
                                 </div>
                             </Link>
@@ -126,8 +128,9 @@ export default function Drafts() {
                                       <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
                                   </div>
-                                  <div className="flex flex-row items-center justify-between">
-                                    <div className="mt-4 rounded-3xl text-lg bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                  <div className="flex mt-4 flex-row items-center justify-between">
+                                    <div className="rounded-3xl text-lg bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                    <p className="text-blue-50 text-lg font-bold">{draft.length + " words"}</p>
                                   </div>
                                 </div>
                             </Link>
@@ -147,8 +150,9 @@ export default function Drafts() {
                                       <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
                                   </div>
-                                  <div className="flex flex-row items-center justify-between">
-                                    <div className="mt-4 rounded-3xl text-lg bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                  <div className="flex mt-4 flex-row items-center justify-between">
+                                    <div className="rounded-3xl text-lg bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                    <p className="text-blue-50 text-lg font-bold">{draft.length + " words"}</p>
                                   </div>
                                 </div>
                             </Link>
@@ -168,8 +172,9 @@ export default function Drafts() {
                                       <p className="text-xl font-semibold ">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
                                   </div>
-                                  <div className="flex flex-row items-center justify-between">
-                                    <div className="mt-4 rounded-3xl text-lg bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                  <div className="flex mt-4 flex-row items-center justify-between">
+                                    <div className="rounded-3xl text-lg bg-green-50 text-green-800 px-3 py-2 font-semibold">{draft.status}</div>
+                                    <p className="text-blue-50 text-lg font-bold">{draft.length + " words"}</p>
                                   </div>
                                 </div>
                             </Link>
