@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../api/supabase'
 import Link from 'next/link'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 export default function Drafts() {
 
@@ -10,6 +11,8 @@ export default function Drafts() {
     const [ plannedCount, setPlannedCount ] = useState(0)
     const [ draftingCount, setDraftingCount ] = useState(0)
     const [ finishedCount, setFinishedCount ] = useState(0)
+    const router = useRouter()
+
 
     async function showDrafts(){
         let { data: drafts, error } = await supabase
@@ -39,6 +42,10 @@ export default function Drafts() {
         let { data: users, error } = await supabase
         .from('users')
         .select('name, newsletter')
+    }
+
+    async function editDraft(draft_id) {
+      router.push(`/my-drafts/${draft_id}/edit`)
     }
 
     useEffect(() => {
@@ -86,7 +93,7 @@ export default function Drafts() {
                   filteredBy == "all" && <p className="mt-4 text-gray-600 text-lg">All your drafts</p>
                 }
                 {
-                  filteredBy == "planning" && <p className="mt-4 text-gray-600 text-lg"><span className="font-bold text-blue-600">{plannedCount} drafts</span> in early stage: brainstorming, writing notes down, outlining...</p>
+                  filteredBy == "planning" && <p className="mt-4 text-gray-600 text-lg">You have <span className="text-blue-600">{plannedCount} drafts</span> in early stage: brainstorming, writing notes down, outlining...</p>
                 }
                 {
                   filteredBy == "finished" && <p className="mt-4 text-gray-600 font-bold text-lg"><span className="font-bold text-green-600">{finishedCount} drafts</span> are finished and ready to be sent. One last review and you&apos;re good to go!</p>
@@ -145,6 +152,7 @@ export default function Drafts() {
                                   <div className="flex mt-4 flex-row items-center justify-between">
                                     <div className="rounded-xl text-lg bg-gray-50 text-gray-800 px-3 py-2 font-semibold">{draft.status + " 🤔"}</div>
                                     <p className="text-blue-50 bg-blue-500 rounded-xl px-3 py-2 text-lg font-bold">{draft.length + " words"}</p>
+                                    <p className="text-gray-800 bg-yellow-400 rounded-xl px-3 py-2 text-lg font-bold">Edit ✏️</p>
                                   </div>
                                 </div>
                             </Link>
@@ -156,20 +164,21 @@ export default function Drafts() {
                         drafts.map(
                             draft =>
                             
-                            <Link href={`/my-drafts/${draft.id}`} key={draft.id} className={`${draft.status == "drafting" ? '' : 'hidden'}`}>
-                                <div id={draft.id} className="h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4">
+                                <div id={draft.id} className={`${draft.status == "drafting" ? '' : 'hidden'} h-full flex flex-col justify-between bg-blue-600 border-2 border-blue-600 rounded-md px-5 py-4`}>
                                   <div className="flex flex-col justify-center items-center">
                                     <h3 className="text-xl text-center font-poppins text-blue-600 bg-gray-50 rounded-md px-3 py-1 shadow-md shadow-blue-700 font-bold">{draft.subject_line}</h3>
+                                    <Link href={`/my-drafts/${draft.id}`} key={draft.id}>
                                     <div className="mt-4 bg-gray-50 rounded-md px-3 py-4">
                                       <p className="text-xl font-medium font-poppins">{draft.text.length > 200 ? draft.text.slice(0, 200) + "... SEE MORE" : draft.text}</p>
                                     </div>
+                                    </Link>
                                   </div>
                                   <div className="flex mt-4 flex-row items-center justify-between">
                                     <div className="rounded-xl text-lg bg-blue-50 text-blue-800 px-3 py-2 font-semibold">{draft.status + " ✏️"}</div>
                                     <p className="text-blue-50 bg-blue-500 rounded-xl px-3 py-2 text-lg font-bold">{draft.length + " words"}</p>
+                                    <button type="button" onClick={() => editDraft(draft.id)} className="text-gray-800 border-2 border-yellow-400 bg-yellow-400 rounded-xl px-3 py-2 text-lg font-bold">Edit ✏️</button>
                                   </div>
                                 </div>
-                            </Link>
                             
                         )   
                     }
