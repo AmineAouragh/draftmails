@@ -47,8 +47,9 @@ export default function Drafts() {
       let { data: drafts, error } = await supabase
       .from('drafts')
       .select('id, subject_line, text, status, length')
-      .ilike('text', search_keyword)
+      .ilike('text', `%${search_keyword}%`)
       setDrafts(drafts)
+      console.log(drafts)
     }
 
     function convertTimestampToDate(timestamp){
@@ -100,7 +101,6 @@ export default function Drafts() {
         setPlannedCount(planning)
         setDraftingCount(drafting)
         setFinishedCount(finished)
-        console.log(timestamp)
     }
 
     async function getUserData(){
@@ -192,6 +192,9 @@ export default function Drafts() {
                                           draft.text.length > 100 && (
                                             view == 'list' ? draft.text.slice(0, 100) + "... SEE MORE" : draft.text.slice(0, 200) + "... SEE MORE"
                                           )
+                                        }
+                                        {
+                                          draft.text.length <= 100 && draft.text
                                         }
                                       </p>
                                     </div> 
@@ -357,6 +360,9 @@ export default function Drafts() {
                                             view == 'list' ? draft.text.slice(0, 100) + "... SEE MORE" : draft.text.slice(0, 200) + "... SEE MORE"
                                           )
                                         }
+                                        {
+                                          draft.text.length <= 100 && draft.text
+                                        }
                                       </p>
                                     </div>
                                     </Link>
@@ -433,6 +439,9 @@ export default function Drafts() {
                                             view == 'list' ? draft.text.slice(0, 100) + "... SEE MORE" : draft.text.slice(0, 200) + "... SEE MORE"
                                           )
                                         }
+                                        {
+                                          draft.text.length <= 100 && draft.text
+                                        }
                                       </p>
                                     </div>
                                     </Link>
@@ -505,6 +514,9 @@ export default function Drafts() {
                                           draft.text.length > 100 && (
                                             view == 'list' ? draft.text.slice(0, 100) + "... SEE MORE" : draft.text.slice(0, 200) + "... SEE MORE"
                                           )
+                                        }
+                                        {
+                                          draft.text.length <= 100 && draft.text
                                         }
                                       </p>
                                     </div>
