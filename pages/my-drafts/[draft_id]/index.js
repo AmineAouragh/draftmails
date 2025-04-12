@@ -110,30 +110,28 @@ export default function Draft(){
     }
 
     return (
-        <div className="flex flex-col justify-center items-center relative w-full h-full px-2 py-8">
-            <h2 className="text-6xl font-bold text-blue-600">
-              <Link href="/new-draft">
-              Draftmails
-              </Link>
-            </h2>
-            <p className="text-lg font-bold text-blue-800">by Amine</p>
-            
+        <div className="flex flex-row justify-center items-center relative w-full h-full px-2 py-8">            
+            <div className="flex flex-col justify-between items-between mr-4 z-20 sticky">
+              
+            </div>
             <div className="2xl:w-1/2 rounded-md px-6 py-3 mt-8">
-              <h1 className="text-4xl text-gray-50 bg-blue-600 rounded-md px-3 py-2 font-bold text-center">{subjectLine}</h1>
-              <div className="flex flex-row items-center justify-between mt-8">
-                <p className="rounded-2xl py-2 text-blue-500 text-xl font-bold mr-8">{writerName}</p>
+              <h1 className="text-4xl text-blue-600 rounded-md px-3 py-2 font-extrabold text-center">{subjectLine}</h1>
+              <h3 className="italic text-center mt-3 text-xl text-blue-500 font-medium mb-8">Written by {writerName}</h3>
+              <hr className="w-full bg-gray-100 mb-4" />
+              <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-row justify-center items-center">
+                  <p className="rounded-2xl px-2 py-1 bg-gray-600 text-gray-50 font-semibold mr-2">{wordCount} words</p>
+                  <p className="rounded-2xl px-2 py-1 bg-gray-100 text-gray-600 font-semibold">{status}</p>
+                </div>
                 <div>
-                <button type="button" onClick={() => handleCopyClick(emailText)} className="rounded-2xl bg-gray-100 text-gray-900 font-semibold text-xl px-5 py-2 mr-2">Copy</button>
-                <button type="button" onClick={editDraft} className="rounded-2xl bg-yellow-50 text-yellow-700 font-semibold text-xl px-5 py-2 mr-2">Edit</button>
-                <button type="button" onClick={buildDraftLink} className="rounded-2xl bg-green-50 text-green-600 font-semibold text-xl px-5 py-2 mr-2">Share</button>
-                <button type="button" onClick={deleteDraft} className="rounded-2xl bg-red-50 text-red-600 font-semibold text-xl px-5 py-2 mr-2">Delete</button>
-                <button type="button" onClick={() => router.push("/my-drafts")} className="text-blue-600 font-semibold text-lg px-5 py-2 hover:bg-blue-50 rounded-2xl duration-700 transition">Drafts</button>
+                  <button type="button" onClick={() => handleCopyClick(emailText)} className="rounded-2xl bg-gray-800 text-gray-50 font-semibold text-lg px-5 py-2 mr-4">Copy</button>
+                  <button type="button" onClick={editDraft} className="rounded-2xl bg-yellow-400 text-gray-800 font-semibold text-lg px-5 py-2 mr-4">Edit</button>
+                  <button type="button" onClick={buildDraftLink} className="rounded-2xl bg-green-50 text-green-600 font-semibold text-lg px-5 py-2 mr-4">Share</button>
+                  <button type="button" onClick={deleteDraft} className="rounded-2xl bg-red-50 text-red-600 font-semibold text-lg px-5 py-2 mr-4">Delete</button>
+                  <button type="button" onClick={() => router.push("/my-drafts")} className="text-blue-600 font-semibold text-lg px-5 py-2 hover:bg-blue-50 rounded-2xl duration-700 transition">Drafts</button>
                 </div>
               </div>
-              <div className="flex flex-row justify-start items-center">
-                <p className="rounded-2xl px-2 py-1 bg-gray-600 text-gray-50 font-semibold mr-2">{wordCount} words</p>
-                <p className="rounded-2xl px-2 py-1 bg-gray-100 text-gray-600 font-semibold">{status}</p>
-              </div>
+              <hr className="w-full bg-gray-100 mt-4"/>
               <p className="text-xl rounded-md p-2 mt-4" dangerouslySetInnerHTML={{ __html: emailText }}></p>
             </div>
         </div>
