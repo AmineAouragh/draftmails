@@ -25,7 +25,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-
+import { FaPenToSquare } from "react-icons/fa6"
 
 
 export default function Drafts() {
@@ -170,7 +170,8 @@ export default function Drafts() {
                   <button type="button" className="mt-8 hidden bg-blue-50 text-blue-600 font-bold text-2xl px-5 py-5 rounded-md">+ Start a new draft</button>
                 </Link>
                 <Link href="/new-draft" className={`mb-4 border border-blue-400 bg-gradient-to-b from-blue-700 to-blue-500 font-poppins text-white hover:bg-blue-700 text-2xl font-bold rounded-md h-full flex flex-col justify-center items-center px-5 py-5`}>
-                        + Start a new draft
+                  <FaPenToSquare />
+                  <span className='mt-3'>Start a new draft</span>
                 </Link>
                 <div className={`mt-8 ${view == 'grid' ? "grid grid-cols-1 xl:grid-cols-3 gap-8" : "w-full flex flex-col"}`}>
                     

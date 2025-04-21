@@ -20,7 +20,10 @@ module.exports = {
   			poppins: [
   				'Poppins',
   				'serif'
-  			]
+  			],
+			'BebasNeue': ['Bebas Neue', 'sans-serif'],
+		  'Inter': ['Inter', 'sans-serif'],
+		  'Cairo': ['Cairo', 'sans-serif'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
